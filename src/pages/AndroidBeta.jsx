@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const AndroidBeta = () => {
+const AndroidBeta = () => {
   return (
     <div>AndroidBeta</div>
   )
 }
+
+export default AndroidBeta;

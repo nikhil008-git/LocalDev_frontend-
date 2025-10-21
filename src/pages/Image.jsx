@@ -1,7 +1,8 @@
 import React from 'react'
 
-export const Image = () => {
+ const Image = () => {
   return (
     <div>Image</div>
   )
 }
+export default Image;

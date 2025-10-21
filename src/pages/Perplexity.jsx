@@ -1,7 +1,8 @@
 import React from 'react'
 
-export const Perplexity = () => {
+const Perplexity = () => {
   return (
     <div>Perplexity</div>
   )
 }
+export default Perplexity;

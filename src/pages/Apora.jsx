@@ -1,7 +1,8 @@
 import React from 'react'
 
-export const Apora = () => {
+const Apora = () => {
   return (
     <div>Apora</div>
   )
 }
+export default Apora;

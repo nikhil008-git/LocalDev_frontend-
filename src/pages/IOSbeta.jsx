@@ -5,3 +5,5 @@ export const IOSbeta = () => {
     <div>IOSbeta</div>
   )
 }
+
+export default IOSbeta;
