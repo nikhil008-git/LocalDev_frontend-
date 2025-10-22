@@ -8,12 +8,10 @@ import Header from "./component/Header";
 import AndroidBeta from "./pages/AndroidBeta";
 import Apora from "./pages/Apora";
 import IOSbeta from "./pages/IOSbeta";
-import Perplexity from "./pages/Perplexity";
 import SummaryPage from "./pages/Summary";
 import Footer from "./component/Footer";
-import Blog from "./pages/Blog";
+import Newsletter from "./pages/Newsletter";
 import Upcoming from "./pages/Upcoming";
-import TestFlight from "./pages/TestFlight";
 
 export default function App() {
  
@@ -22,8 +20,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/testflight" element={<TestFlight />} />
-        < Route path="/blog" element={<Blog />} />
+        < Route path="/newsletter" element={<Newsletter />} />
       <Route path = "/upcomings" element={<Upcoming />} />  
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -35,7 +32,6 @@ export default function App() {
         <Route path="/android" element={<AndroidBeta />} />
         <Route path="/apora" element={<Apora />} />
         <Route path="/ios" element={<IOSbeta />} />
-        <Route path="/perplexity" element={<Perplexity />} />
         <Route path="/summary" element={<SummaryPage />} />
       </Routes>
       <Footer />

@@ -32,7 +32,7 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '10px' }}>
-            <label>Email</label>
+            <label>Email</label>  
             <input
               type="email"
               value={formData.email}
