@@ -52,7 +52,7 @@ export const features = [
     },
     {
       id: 6,
-      title: "World-class audio/video quality",
+      title: "class audio/video quality",
       description: "Built on Zoom's world-class infra, plus custom upgrades for crispness and latency."
     }
   ];
@@ -87,3 +87,16 @@ export const features = [
     description: "You're in control — record and summarize automatically or only when you choose."
   }
 ];
+
+export const NewsLetterData = [
+  {
+    id: 1,
+    date: "Aug 7, 2025",
+    title: "Welcome to LocalDev Circle.",
+  },
+  {
+    id :2,
+    date: "Oct 5,2025",
+    title: "The Dumb Agent Manifesto",
+  }
+]

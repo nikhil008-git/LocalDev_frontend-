@@ -10,7 +10,7 @@ import Apora from "./pages/Apora";
 import IOSbeta from "./pages/IOSbeta";
 import SummaryPage from "./pages/Summary";
 import Footer from "./component/Footer";
-import Newsletter from "./pages/Newsletter";
+import NewsLetter from "./pages/Newsletter";
 import Upcoming from "./pages/Upcoming";
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        < Route path="/newsletter" element={<Newsletter />} />
+        < Route path="/newsletter" element={<NewsLetter />} />
       <Route path = "/upcomings" element={<Upcoming />} />  
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/ios" element={<IOSbeta />} />
         <Route path="/summary" element={<SummaryPage />} />
       </Routes>
-      <Footer />
+    
     </>
   );
 }
