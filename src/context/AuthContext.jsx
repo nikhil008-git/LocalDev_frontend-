@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Use environment variable with fallback
-  const ENDPOINT = import.meta.env.VITE_API_ENDPOINT || "http://localhost:3000/v1/api";
+  const ENDPOINT = import.meta.env.VITE_API_ENDPOINT || "https://localdev-backend-1.onrender.com/v1/api";
 
   // Fetch user info from backend using token
   const fetchUser = useCallback(async (authToken) => {
