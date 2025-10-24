@@ -1,33 +1,37 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { useState } from 'react';
-import waitlist from '../assets/waitlist/waitlist.png'; // Make sure path & filename are correct
+import { useWaitlist } from "../context/WaitlistContext"; // ✅ import context
+import waitlist from '../assets/waitlist/waitlist.png';
 import Dashboard_header from "../component/Dashboard_header";
 
 export default function LocalDevWaitlist() {
+  const { joinWaitlist, loading, error } = useWaitlist(); // use context
   const [activeTab, setActiveTab] = useState('waitlist');
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState('idle'); // idle, loading, success, error
-  const [errorMessage, setErrorMessage] = useState('');
+  const [status, setStatus] = useState('idle'); // idle, success, error
+  const [localError, setLocalError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!email) {
-      setStatus('error');
-      setErrorMessage('Email is required');
-      setTimeout(() => {
-        setStatus('idle');
-        setErrorMessage('');
-      }, 3000);
+      setLocalError("Email is required");
+      setTimeout(() => setLocalError(''), 3000);
       return;
     }
 
     setStatus('loading');
-    
-    // Simulate API call
-    setTimeout(() => {
+
+    const result = await joinWaitlist(email); // Call backend
+    if (result.success) {
       setStatus('success');
       setEmail('');
       setTimeout(() => setStatus('idle'), 2000);
-    }, 1000);
+    } else {
+      setStatus('error');
+      setLocalError(result.message);
+      setTimeout(() => setLocalError(''), 4000);
+    }
   };
 
   return (
@@ -51,9 +55,7 @@ export default function LocalDevWaitlist() {
             <button
               onClick={() => setActiveTab('waitlist')}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 ${
-                activeTab === 'waitlist'
-                  ? 'bg-white/10 text-white'
-                  : 'text-gray-500 hover:text-gray-300'
+                activeTab === 'waitlist' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               Waitlist
@@ -61,9 +63,7 @@ export default function LocalDevWaitlist() {
             <button
               onClick={() => setActiveTab('manifesto')}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 ${
-                activeTab === 'manifesto'
-                  ? 'bg-white/10 text-white'
-                  : 'text-gray-500 hover:text-gray-300'
+                activeTab === 'manifesto' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'
               }`}
             >
               Manifesto
@@ -89,34 +89,28 @@ export default function LocalDevWaitlist() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      disabled={status === 'loading'}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') handleSubmit(e);
-                      }}
+                      disabled={loading}
+                      onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(e); }}
                       className="flex-1 text-sm pl-6 pr-32 py-3 h-12 bg-white/5 backdrop-blur-sm text-white placeholder-gray-400 rounded-full border border-white/20 focus:outline-none focus:border-white/40 transition-all"
                     />
                     <button
                       onClick={handleSubmit}
-                      disabled={status === 'loading'}
+                      disabled={loading}
                       className="absolute h-9 px-5 bg-white/10 text-white text-sm top-1/2 transform -translate-y-1/2 right-1.5 rounded-full font-medium hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {status === 'loading'
-                        ? 'Joining…'
-                        : status === 'success'
-                        ? 'Joined!'
-                        : 'Join Waitlist'}
+                      {loading ? 'Joining…' : status === 'success' ? 'Joined!' : 'Join Waitlist'}
                     </button>
                   </div>
-                  {errorMessage && (
-                    <p className="absolute text-xs text-red-400 top-full mt-2 px-2">{errorMessage}</p>
+                  {(localError || error) && (
+                    <p className="absolute text-xs text-red-400 top-full mt-2 px-2">
+                      {localError || error}
+                    </p>
                   )}
                 </div>
               </div>
             ) : (
               <div className="space-y-4">
-                <h1 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Our Manifesto
-                </h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-white mb-4">Our Manifesto</h1>
                 <div className="text-gray-300 text-base leading-relaxed space-y-3">
                   <p>
                     At LocalDev, we believe that developers deserve a platform that gives them complete control, context, 

@@ -21,7 +21,7 @@ export const WaitlistProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   // Use environment variable with fallback
-  const ENDPOINT = import.meta.env.VITE_API_ENDPOINT || "http://localhost:3000/api";
+  const ENDPOINT = import.meta.env.VITE_API_ENDPOINT || "http://localhost:3000/v2/api";
 
   // Function to join the waitlist
   const joinWaitlist = useCallback(async (email) => {
@@ -29,7 +29,7 @@ export const WaitlistProvider = ({ children }) => {
       setLoading(true);
       setError(null);
 
-      const res = await axios.post(`${ENDPOINT}/waitlist/join`, { email });
+      const res = await axios.post("http://localhost:3000/v2/api/waitlist/join", { email });
 
       setWaitlistJoined(true);
       return { success: true, message: res.data.message || "Joined waitlist successfully" };
